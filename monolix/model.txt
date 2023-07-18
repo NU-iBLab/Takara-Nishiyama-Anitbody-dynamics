@@ -1,0 +1,24 @@
+
+[LONGITUDINAL]
+input = {G0,vac3,M0,M33,mu1,mu2,m,K,delay3}
+vac3={use=regressor}
+
+EQUATION:
+
+dg=0.693
+M_0=M0
+t0=0
+
+if t<=vac3+delay3
+dM=-mu1*M
+else
+g = G0*exp(-dg*(t-vac3))
+dM=M33*(g^m)/(g^m+K^m)- mu2*M
+end
+
+ddt_M = dM
+
+logM=log10(M)
+
+OUTPUT: 
+output = {logM}
